@@ -6,14 +6,28 @@ import Layout from "../components/Layout";
 const IndexPage = () => {
   return (
     <Layout>
-      <main>
-        <h1>This is pablo marcano</h1>
-        <p>I am pablo</p>
-      </main>
+      <Main>
+        <Header>I'm a<em> Full stack developer </em> with lots of passion and dolorsitamet abasdbasd </Header>
+        <div>I am pablo</div>
+      </Main>
     </Layout>
   );
 };
 
-const Main = styled.main``;
+
+const Header = styled.h2`
+  font-size: 3em;
+  color: ${({theme}) => theme.text};
+  em {
+    background-color: ${({theme}) => theme.contrast1};
+    color: ${({theme}) => theme.background};
+    font-style: normal;
+    font-weight: bold;
+  }
+`
+
+const Main = styled.main`
+  margin-top: 1em;
+`;
 
 export default IndexPage;
