@@ -11,10 +11,16 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        icon: "src/images/favicon.png",
       },
     },
-    "gatsby-plugin-sharp",
+    
+    {
+      resolve:"gatsby-plugin-sharp",
+      options: {
+        icon: "src/images/favicon.png",
+      }
+    }, 
     "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",

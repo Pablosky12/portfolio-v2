@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled, { ThemeProvider } from "styled-components";
 import BaseTheme from "../utils/Base.theme";
-
+import logo from '../images/logo.svg'
 function Layout({ children }) {
   console.log(children);
   return (
@@ -32,7 +32,7 @@ function Layout({ children }) {
       <All>
         <Header>
           <Link to="/" className="home">
-            <img src="https://picsum.photos/30/30" />
+            <img src={logo} width="60px"/>
             <h1>Pablo M.</h1>
           </Link>
           <nav>
