@@ -24,9 +24,68 @@ const IndexPage = () => {
       <Divider>
         <a href="#work">See work ▼ </a>
       </Divider>
+      <section href="#work">
+        <h3>Showcase</h3>
+        <Projects />
+      </section>
     </Layout>
   );
 };
+
+const projects = [
+  {
+    name: "This Site!",
+    image: "https://source.unsplash.com/random/800",
+  },
+  {
+    name: "Another Site!",
+    image: "https://source.unsplash.com/random/800",
+  },
+  {
+    name: "another one!",
+    image: "https://source.unsplash.com/random/800",
+  },
+];
+
+function Projects() {
+  return (
+    <ProjectsContainer>
+      {projects.map((p) => (
+        <ProjectCard>
+          <h3>{p.name}</h3>
+          <img src={p.image} alt={`Screenshot of project ${p.name}`} />
+        </ProjectCard>
+      ))}
+    </ProjectsContainer>
+  );
+}
+const ProjectsContainer = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  counter-reset: section;
+
+`;
+const ProjectCard = styled.li`
+  width: 30vh;
+  height: 30vh;
+  padding: 1em;
+  background-color: ${({ theme }) => theme.contrast1};
+  color: ${({ theme }) => theme.themeContrast};
+  position: relative;
+  img {
+    width: 70%;
+    height: 70%;
+    margin: 0;
+    object-fit: cover;
+    object-position: 30% 50%;
+    border-radius: 800px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+`;
 
 const Header = styled.h2`
   font-size: 3em;
@@ -40,7 +99,7 @@ const Header = styled.h2`
     font-weight: bold;
   }
   @media (min-height: 748px) {
-    padding: 30% 0;
+    padding: 25vh 0;
   }
 `;
 
@@ -60,8 +119,6 @@ const Headshot = styled.img`
   transform: translateY(0.5em);
   border-radius: 100px;
   padding: 1em;
-  object-fit: cover;
-  object-position: 30% 50%;
 `;
 const PresentationCard = styled.div`
   display: flex;
