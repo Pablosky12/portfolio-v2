@@ -32,7 +32,7 @@ function Layout({ children }) {
       <All>
         <Header>
           <Link to="/" className="home">
-            <img src={logo} width="60px"/>
+            <img src={logo} width="60px" alt="abstract logo"/>
             <h1>Pablo M.</h1>
           </Link>
           <nav>
@@ -83,6 +83,7 @@ const NavList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+  z-index: 10;
   li {
     margin: 0;
     padding-left: 1em;
@@ -109,7 +110,7 @@ const NavList = styled.ul`
 const Trigger = styled.button`
   display: none;
   color: ${({ theme }) => theme.text};
-  z-index: 10;
+  z-index: 11;
   position: absolute;
   top: 1.3em;
   right: 2em;
