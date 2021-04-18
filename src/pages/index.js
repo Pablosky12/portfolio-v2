@@ -24,10 +24,10 @@ const IndexPage = () => {
       <Divider>
         <a href="#work">See work ▼ </a>
       </Divider>
-      <section href="#work">
+      <Section href="#work">
         <h3>Showcase</h3>
         <Projects />
-      </section>
+      </Section>
     </Layout>
   );
 };
@@ -45,14 +45,22 @@ const projects = [
     name: "another one!",
     image: "https://source.unsplash.com/random/800",
   },
+  {
+    name: "DJ-KHALED!",
+    image: "https://source.unsplash.com/random/800",
+  },
+  {
+    name: "DJ-KHALED!",
+    image: "https://source.unsplash.com/random/800",
+  },
 ];
 
 function Projects() {
   return (
     <ProjectsContainer>
-      {projects.map((p) => (
-        <ProjectCard>
-          <h3>{p.name}</h3>
+      {projects.map((p, i) => (
+        <ProjectCard i={i}>
+          <h4>{p.name}</h4>
           <img src={p.image} alt={`Screenshot of project ${p.name}`} />
         </ProjectCard>
       ))}
@@ -64,16 +72,26 @@ const ProjectsContainer = styled.ul`
   display: flex;
   flex-direction: row;
   position: relative;
-  counter-reset: section;
-
 `;
 const ProjectCard = styled.li`
-  width: 30vh;
-  height: 30vh;
+  min-width: 30vh;
+  min-height: 30vh;
   padding: 1em;
-  background-color: ${({ theme }) => theme.contrast1};
   color: ${({ theme }) => theme.themeContrast};
   position: relative;
+  left: ${({ i }) => `-${i * 6}%`};
+  &:nth-child(even) {
+    top: 6vh;
+  }
+  &:nth-child(3n + 1) {
+    background-color: ${({ theme }) => theme.contrast1};
+  }
+  &:nth-child(3n + 2) {
+    background-color: ${({ theme }) => theme.contrast2};
+  }
+  &:nth-child(3n + 3) {
+    background-color: ${({ theme }) => theme.contrast3};
+  }
   img {
     width: 70%;
     height: 70%;
@@ -84,6 +102,13 @@ const ProjectCard = styled.li`
     position: absolute;
     right: 0;
     bottom: 0;
+  }
+`;
+
+const Section = styled.section`
+  h3 {
+    padding-top: 2em;
+    color: ${({ theme }) => theme.textSecondary};
   }
 `;
 
@@ -108,6 +133,7 @@ const Divider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1em 0;
   a {
     color: ${({ theme }) => theme.text};
     text-decoration: underline;
