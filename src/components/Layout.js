@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled, { ThemeProvider } from "styled-components";
 import BaseTheme from "../utils/Base.theme";
-import logo from '../images/logo.svg'
+import logo from "../images/logo.svg";
+import menu from "../images/menu.svg";
+
 function Layout({ children }) {
-  console.log(children);
   return (
     // TODO: allow theming
     <ThemeProvider theme={BaseTheme}>
@@ -32,7 +33,7 @@ function Layout({ children }) {
       <All>
         <Header>
           <Link to="/" className="home">
-            <img src={logo} width="60px" alt="abstract logo"/>
+            <img src={logo} width="60px" alt="abstract logo" />
             <h1>Pablo M.</h1>
           </Link>
           <nav>
@@ -59,17 +60,17 @@ function NavigationOptions() {
   return (
     <>
       <Trigger onClick={() => setIsOpen(!isOpen)} isOpen={isOpen}>
-        ==
+        <img src={menu} alt="menu trigger" />
       </Trigger>
       <NavList isOpen={isOpen}>
         <li>
-          <Link to="/Showcase">Showcase</Link>
+          <Link to="/">Showcase</Link>
         </li>
         <li>
-          <Link to="/Blog">Blog</Link>
+          <Link to="/">Blog</Link>
         </li>
         <li>
-          <Link to="/About">About Me</Link>
+          <Link to="/">About Me</Link>
         </li>
       </NavList>
     </>
@@ -109,16 +110,21 @@ const NavList = styled.ul`
 
 const Trigger = styled.button`
   display: none;
-  color: ${({ theme }) => theme.text};
   z-index: 11;
   position: absolute;
-  top: 1.3em;
+  top: 1.6em;
   right: 2em;
   justify-self: flex-end;
+  background: none;
+  border: none;
+  img {
+    width: 1.5em;
+    height: auto;
+    margin-top: 10px;
+  }
   @media (max-width: 768px) {
     position: ${({ isOpen }) => (isOpen ? "fixed" : "absolute")};
     display: block;
-    background-color: blue;
   }
 `;
 
@@ -159,6 +165,7 @@ const Header = styled.header`
     color: ${({ theme }) => theme.text};
     padding: 0 0.5em;
     margin: 0;
+    line-height: 1.5em;
   }
 
   @media (max-width: 768px) {
