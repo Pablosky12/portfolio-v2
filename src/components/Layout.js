@@ -5,8 +5,11 @@ import styled, { ThemeProvider } from "styled-components";
 import BaseTheme from "../utils/Base.theme";
 import logo from "../images/logo.svg";
 import menu from "../images/menu.svg";
+import github from "../images/github.svg";
+import linkedin from "../images/linkedin.svg";
+import twitter from "../images/twitter.svg";
 
-function Layout({ children }) {
+function Layout({ children, showGetInTouch = true }) {
   return (
     // TODO: allow theming
     <ThemeProvider theme={BaseTheme}>
@@ -33,7 +36,11 @@ function Layout({ children }) {
       <All>
         <Header>
           <Link to="/" className="home">
-            <img src={logo} width="60px" alt="abstract logo" />
+            <img
+              src={logo}
+              width="60px"
+              alt="two squares and a circle grouped to form a logo"
+            />
             <h1>Pablo M.</h1>
           </Link>
           <nav>
@@ -41,6 +48,49 @@ function Layout({ children }) {
           </nav>
         </Header>
         {children}
+        {showGetInTouch && (
+          <Footer>
+            <h3>Get in touch.</h3>
+            <p>Lets build your ideas together</p>
+            <a
+              href="mailto:pmarcanol10@gmail.com?subject=Let's%20build%20something%20together!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact"
+            >
+              Send an email
+            </a>
+            <ul>
+              <li>
+                <a
+                  href="https://github.com/Pablosky12"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={github} alt="github" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/pablo-m-1b2366124/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={linkedin} alt="linkedin" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/stiv_ml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={twitter} alt="github" />
+                </a>
+              </li>
+            </ul>
+          </Footer>
+        )}
       </All>
     </ThemeProvider>
   );
@@ -76,6 +126,42 @@ function NavigationOptions() {
     </>
   );
 }
+
+const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 1em;
+  h3 {
+    color: ${({ theme }) => theme.text};
+    font-size: 2em;
+  }
+  .contact {
+    border: 1px solid ${({ theme }) => theme.text};
+    padding: 1em;
+    font-weight: normal;
+    color: ${({ theme }) => theme.text};
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    margin-top:7vh;
+    border-top: 1px solid ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.text};
+    li {
+      width: 1.5em;
+      height: 1.5em;
+      color: white;
+      margin: 1em;
+    }
+  }
+`;
 
 const NavList = styled.ul`
   display: flex;

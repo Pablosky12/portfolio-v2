@@ -50,14 +50,6 @@ const projects = [
   {
     isComingSoon: true,
   },
-  {
-    name: "another one!",
-    image: "https://source.unsplash.com/random/800",
-  },
-  {
-    name: "DJ-KHALED!",
-    image: "https://source.unsplash.com/random/800",
-  },
 ];
 
 const articles = [
@@ -69,14 +61,6 @@ const articles = [
   },
   {
     isComingSoon: true,
-  },
-  {
-    name: "another one!",
-    image: "https://source.unsplash.com/random/800",
-  },
-  {
-    name: "DJ-KHALED!",
-    image: "https://source.unsplash.com/random/800",
   },
 ];
 
