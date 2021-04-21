@@ -90,7 +90,7 @@ function Resume() {
           <ol>
             {auxiliaryWork.map((i) => (
               <li>
-                <ExperienceItem>
+                <ExperienceItem className="auxiliary">
                   <p className="date">
                     {i.start} <br /> - <br />
                     {i.end ? i.end : "Present"}
@@ -110,6 +110,7 @@ function Resume() {
 const ExperienceItem = styled.div`
   display: flex;
   justify-content: flex-start;
+  padding: 3em 0;
   p,
   h3 {
     padding-right: 1em;
@@ -134,6 +135,10 @@ const ExperienceItem = styled.div`
 
   .description {
     color: ${({ theme }) => theme.textSecondary};
+  }
+
+  &.auxiliary {
+    padding: 1em 0;
   }
 
   @media (max-width: 768px) {
