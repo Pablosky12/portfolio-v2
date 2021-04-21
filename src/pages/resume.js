@@ -29,7 +29,7 @@ function Resume() {
             <img src={photo} alt="Pablo Marcano Headshot" />
           </div>
         </HeadSection>
-        <ResumeSection>
+        <ResumeSection className="skills">
           <h2>Skills</h2>
           <p>
             I have worked with JavaScript during most of my career, making it my
@@ -109,7 +109,7 @@ function Resume() {
 
 const ExperienceItem = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   p,
   h3 {
     padding-right: 1em;
@@ -124,7 +124,9 @@ const ExperienceItem = styled.div`
   }
 
   .title {
-    width: 160px;
+    min-width: 180px;
+    width: 180px;
+    max-width: 180px;
     p {
       color: ${({ theme }) => theme.textSecondary};
     }
@@ -133,16 +135,25 @@ const ExperienceItem = styled.div`
   .description {
     color: ${({ theme }) => theme.textSecondary};
   }
+
+  @media (max-width: 768px) {
+    display: inline;
+    flex-direction: column;
+    .date, .title {
+      width: 40%;
+      display: inline-block;
+    }
+  }
 `;
 
 const ResumeSection = styled.section`
-  padding-left: 20%;
-  padding-right: 20%;
+
   padding-bottom: 2em;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  padding: 0 20%;
 
   &.experience {
     padding-top: 3em;
@@ -151,7 +162,13 @@ const ResumeSection = styled.section`
     h2 {
       padding-left: 20%;
     }
+
+    @media (max-width: 768px) {
+      padding:0;
+      padding-top: 3em;
+    }
   }
+  
 
   h2 {
     color: ${({ theme }) => theme.textSecondary};
@@ -160,6 +177,10 @@ const ResumeSection = styled.section`
   ol {
     list-style: none;
     margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
   }
 `;
 const HeadSection = styled.section`
@@ -229,8 +250,7 @@ const experienceItems = [
    Built performant and scalable APIs to integrate with SPAs
    and mobile applications.
    `,
-      `.
-   Ensured the quality of every project with unit and
+      `Ensured the quality of every project with unit and
    integration testing suites integrated on CI/CD pipelines.
    `,
       `Lead the onboarding of a new customer through a visit to
