@@ -219,7 +219,6 @@ const Trigger = styled.button`
 
 const All = styled.div`
   background-color: ${({ theme }) => theme.background};
-  min-height: 200vh;
   padding: 1em;
   color: ${({ theme }) => theme.text};
   @media print {

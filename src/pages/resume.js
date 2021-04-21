@@ -197,6 +197,8 @@ const HeadSection = styled.section`
   }
   .photo {
     width: 30%;
+    max-width: 300px;
+
     justify-content: center;
     align-items: center;
     display: flex;
