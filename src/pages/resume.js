@@ -154,6 +154,8 @@ const ResumeSection = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0 20%;
+  color: ${({ theme }) => theme.textSecondary};
+
 
   &.experience {
     padding-top: 3em;
