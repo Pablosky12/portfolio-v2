@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import headBw from "../images/me-bw.jpg";
@@ -56,30 +56,90 @@ const projects = [
 ];
 
 function Projects({ source, title }) {
+  const containerRef = useRef();
+  const [position, setPosition] = useState(0);
+  useEffect(() => {
+    moveArticles();
+  }, [position]);
+
+  function moveArticles() {
+    const elem = containerRef.current;
+    elem.style.transform = `translateX(${position * -30}vw)`;
+  }
   return (
-    <ProjectsContainer>
-      {source.map((item, i) => {
-        if (item.isComingSoon) {
+    <ScrollContainer>
+      <button
+        className="left"
+        onClick={() => {
+          if (position === 0) {
+            return;
+          }
+          setPosition(position - 1);
+        }}
+      >
+        {"<"}
+      </button>
+      <ProjectsContainer className={`projects-${title}`} ref={containerRef}>
+        {source.map((item, i) => {
+          if (item.isComingSoon) {
+            return (
+              <ComingSoon i={i} img={comingSoon}>
+                <img src={comingSoon} alt="Coming Soon text" />
+                Coming Soon
+              </ComingSoon>
+            );
+          }
           return (
-            <ComingSoon i={i} img={comingSoon}>
-              <img src={comingSoon} alt="Coming Soon text" />
-              Coming Soon
-            </ComingSoon>
+            <ProjectCard i={i} key={item.id}>
+              <h4>{item.name}</h4>
+              <img
+                src={item.image}
+                alt={`Screenshot of project ${item.name}`}
+              />
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                View {title}
+              </a>
+            </ProjectCard>
           );
-        }
-        return (
-          <ProjectCard i={i} key={item.id}>
-            <h4>{item.name}</h4>
-            <img src={item.image} alt={`Screenshot of project ${item.name}`} />
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-              View {title}
-            </a>
-          </ProjectCard>
-        );
-      })}
-    </ProjectsContainer>
+        })}
+      </ProjectsContainer>
+      <button
+        className="right"
+        onClick={() => {
+          if (position >= source.length / 4 + 1) {
+            return;
+          }
+          setPosition(position + 1);
+        }}
+      >
+        {">"}
+      </button>
+    </ScrollContainer>
   );
 }
+
+const ScrollContainer = styled.div`
+  width: 100vw;
+  max-width: 95vw;
+  position: relative;
+  button {
+    position: absolute;
+    background-color: ${({ theme }) => theme.textContrast};
+    border: 1px solid ${({ theme }) => theme.text};
+    border-radius: 200px;
+    width: 2em;
+    height: 2em;
+    color: ${({ theme }) => theme.text};
+    top: 50%;
+    z-index: 10;
+    &.left {
+      left: 0;
+    }
+    &.right {
+      right: 0;
+    }
+  }
+`;
 
 const ComingSoon = styled.li`
   min-width: 30vh;
@@ -105,7 +165,7 @@ const ProjectsContainer = styled.ul`
   flex-direction: row;
   position: relative;
   padding-bottom: 10%;
-  overflow: hidden;
+  transition: 0.5s ease-in-out;
   li {
     &:nth-child(even) {
       top: 6vh;
@@ -128,7 +188,7 @@ const ProjectCard = styled.li`
   color: ${({ theme }) => theme.textContrast};
   position: relative;
   left: ${({ i }) => `-${i * 60}px`};
-  h4{
+  h4 {
     font-size: 1.2em;
   }
   img {
