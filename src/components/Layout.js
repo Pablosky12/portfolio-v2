@@ -133,6 +133,7 @@ const Footer = styled.footer`
   align-items: center;
   flex-direction: column;
   padding-bottom: 1em;
+  padding-top: 5em;
   h3 {
     color: ${({ theme }) => theme.text};
     font-size: 2em;
