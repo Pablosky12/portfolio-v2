@@ -45,5 +45,11 @@ module.exports = {
         display: "swap",
       },
     },
+    {
+      resolve: "gatsby-source-dev",
+      options: {
+        username: "stiv_ml",
+      },
+    },
   ],
 };

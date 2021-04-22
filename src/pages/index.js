@@ -4,8 +4,10 @@ import Layout from "../components/Layout";
 import headBw from "../images/me-bw.jpg";
 import comingSoon from "../images/comingsoon.svg";
 import { Header } from "../components/Header";
+import usePosts from "../hooks/usePosts";
 // markup
 const IndexPage = () => {
+  const articles = usePosts();
   return (
     <Layout>
       <Main>
@@ -27,11 +29,11 @@ const IndexPage = () => {
       </Divider>
       <Section href="#work">
         <h3>Showcase</h3>
-        <Projects source={projects}/>
+        <Projects source={projects} title="work" />
       </Section>
       <Section>
         <h3>Latest Articles</h3>
-        <Projects source={articles}/>
+        <Projects source={articles} title="article" />
       </Section>
     </Layout>
   );
@@ -53,34 +55,25 @@ const projects = [
   },
 ];
 
-const articles = [
-  {
-    isComingSoon: true,
-  },
-  {
-    isComingSoon: true,
-  },
-  {
-    isComingSoon: true,
-  },
-];
-
-function Projects({source}) {
+function Projects({ source, title }) {
   return (
     <ProjectsContainer>
-      {source.map((p, i) => {
-        if (p.isComingSoon) {
+      {source.map((item, i) => {
+        if (item.isComingSoon) {
           return (
             <ComingSoon i={i} img={comingSoon}>
-              <img src={comingSoon}  alt="Coming Soon text"/>
+              <img src={comingSoon} alt="Coming Soon text" />
               Coming Soon
             </ComingSoon>
           );
         }
         return (
-          <ProjectCard i={i}>
-            <h4>{p.name}</h4>
-            <img src={p.image} alt={`Screenshot of project ${p.name}`} />
+          <ProjectCard i={i} key={item.id}>
+            <h4>{item.name}</h4>
+            <img src={item.image} alt={`Screenshot of project ${item.name}`} />
+            <a href={item.url} target="_blank" rel="noopener noreferrer">
+              View {title}
+            </a>
           </ProjectCard>
         );
       })}
@@ -135,6 +128,9 @@ const ProjectCard = styled.li`
   color: ${({ theme }) => theme.textContrast};
   position: relative;
   left: ${({ i }) => `-${i * 60}px`};
+  h4{
+    font-size: 1.2em;
+  }
   img {
     width: 70%;
     height: 70%;
@@ -146,6 +142,14 @@ const ProjectCard = styled.li`
     right: 0;
     bottom: 0;
   }
+  a {
+    color: ${({ theme }) => theme.textContrast};
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    left: 1em;
+    bottom: 1em;
+  }
 `;
 
 const Section = styled.section`
@@ -155,8 +159,6 @@ const Section = styled.section`
     color: ${({ theme }) => theme.textSecondary};
   }
 `;
-
-
 
 const Divider = styled.div`
   width: 100%;

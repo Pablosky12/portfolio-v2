@@ -110,7 +110,7 @@ function Resume() {
 const ExperienceItem = styled.div`
   display: flex;
   justify-content: flex-start;
-  padding: 3em 0;
+  padding-bottom: 2em;
   p,
   h3 {
     padding-right: 1em;
@@ -144,7 +144,8 @@ const ExperienceItem = styled.div`
   @media (max-width: 768px) {
     display: inline;
     flex-direction: column;
-    .date, .title {
+    .date,
+    .title {
       width: 40%;
       display: inline-block;
     }
@@ -152,18 +153,15 @@ const ExperienceItem = styled.div`
 `;
 
 const ResumeSection = styled.section`
-
-  padding-bottom: 2em;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   padding: 0 20%;
+  padding-top: 3em;
   color: ${({ theme }) => theme.textSecondary};
 
-
   &.experience {
-    padding-top: 3em;
     padding-left: 5%;
     padding-right: 15%;
     h2 {
@@ -171,11 +169,9 @@ const ResumeSection = styled.section`
     }
 
     @media (max-width: 768px) {
-      padding:0;
-      padding-top: 3em;
+      padding: 0;
     }
   }
-  
 
   h2 {
     color: ${({ theme }) => theme.textSecondary};
