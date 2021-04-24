@@ -20,7 +20,6 @@ const usePosts = () => {
 
   return data.allDevArticles.edges.map((x) => {
       const article = x.node.article;
-      console.log(article);
     return {
         id: article.id,
         image: article.social_image,

@@ -117,9 +117,6 @@ function NavigationOptions() {
           <Link to="/">Showcase</Link>
         </li>
         <li>
-          <Link to="/">Blog</Link>
-        </li>
-        <li>
           <Link to="/resume">About Me</Link>
         </li>
       </NavList>
@@ -222,6 +219,8 @@ const All = styled.div`
   background-color: ${({ theme }) => theme.background};
   padding: 1em;
   color: ${({ theme }) => theme.text};
+  max-width: 100vw;
+  overflow: hidden;
   @media print {
     font-size: 12px;
   }

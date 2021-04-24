@@ -58,27 +58,48 @@ const projects = [
 function Projects({ source, title }) {
   const containerRef = useRef();
   const [position, setPosition] = useState(0);
+  const [pages, setPages] = useState(0);
   useEffect(() => {
     moveArticles();
   }, [position]);
 
+  useEffect(() => {
+    setScrollablePages();
+    const onResizeFn = () => {
+      setPosition(0);
+      setScrollablePages();
+    };
+    const el = window.addEventListener("resize", onResizeFn);
+    return () => window.removeEventListener("resize", el);
+  }, []);
+
   function moveArticles() {
     const elem = containerRef.current;
-    elem.style.transform = `translateX(${position * -30}vw)`;
+    elem.style.transform = `translateX(${position * -100}vw)`;
   }
+
+  function setScrollablePages() {
+    const vw = window.innerWidth;
+    const { current: scrollContainer } = containerRef;
+    const oneElementWidth = scrollContainer.firstChild.offsetWidth * 0.9;
+    const totalWidth = (oneElementWidth * source.length) + oneElementWidth;
+    const pages = Math.round(totalWidth / vw);
+    console.log(totalWidth, vw);
+    setPages(pages);
+  }
+
   return (
     <ScrollContainer>
-      <button
-        className="left"
-        onClick={() => {
-          if (position === 0) {
-            return;
-          }
-          setPosition(position - 1);
-        }}
-      >
-        {"<"}
-      </button>
+      {!(position === 0) && (
+        <button
+          className="left"
+          onClick={() => {
+            setPosition(position - 1);
+          }}
+        >
+          {"<"}
+        </button>
+      )}
       <ProjectsContainer className={`projects-${title}`} ref={containerRef}>
         {source.map((item, i) => {
           if (item.isComingSoon) {
@@ -103,17 +124,16 @@ function Projects({ source, title }) {
           );
         })}
       </ProjectsContainer>
-      <button
-        className="right"
-        onClick={() => {
-          if (position >= source.length / 4 + 1) {
-            return;
-          }
-          setPosition(position + 1);
-        }}
-      >
-        {">"}
-      </button>
+      {!(position == pages - 1) && (
+        <button
+          className="right"
+          onClick={() => {
+            setPosition(position + 1);
+          }}
+        >
+          {">"}
+        </button>
+      )}
     </ScrollContainer>
   );
 }
@@ -142,8 +162,8 @@ const ScrollContainer = styled.div`
 `;
 
 const ComingSoon = styled.li`
-  min-width: 30vh;
-  min-height: 30vh;
+  min-width: 20em;
+  min-height: 20em;
   border-radius: 1000px;
   position: relative;
   left: ${({ i }) => `-${i * 60}px`};
@@ -151,10 +171,9 @@ const ComingSoon = styled.li`
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.textContrast};
-  font-size: 1.5em;
   img {
-    width: 30vh;
-    height: 30vh;
+    width: 20em;
+    height: 20em;
     position: absolute;
   }
 `;
@@ -182,8 +201,8 @@ const ProjectsContainer = styled.ul`
   }
 `;
 const ProjectCard = styled.li`
-  min-width: 30vh;
-  min-height: 30vh;
+  min-width: 20em;
+  min-height: 20em;
   padding: 1em;
   color: ${({ theme }) => theme.textContrast};
   position: relative;
