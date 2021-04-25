@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import headBw from "../images/me-bw.jpg";
+import personalSmall from "../images/personal-small.jpg";
 import comingSoon from "../images/comingsoon.svg";
 import { Header } from "../components/Header";
 import usePosts from "../hooks/usePosts";
+import { Link } from "gatsby";
 // markup
 const IndexPage = () => {
   const articles = usePosts();
@@ -41,8 +43,9 @@ const IndexPage = () => {
 
 const projects = [
   {
-    name: "This Site!",
-    image: "https://source.unsplash.com/random/800",
+    name: "Pablo Marcano Personal Site",
+    image: personalSmall,
+    url: "showcase/1",
   },
   {
     isComingSoon: true,
@@ -82,7 +85,7 @@ function Projects({ source, title }) {
     const vw = window.innerWidth;
     const { current: scrollContainer } = containerRef;
     const oneElementWidth = scrollContainer.firstChild.offsetWidth * 0.9;
-    const totalWidth = (oneElementWidth * source.length) + oneElementWidth;
+    const totalWidth = oneElementWidth * source.length + oneElementWidth;
     const pages = Math.round(totalWidth / vw);
     console.log(totalWidth, vw);
     setPages(pages);
@@ -117,9 +120,13 @@ function Projects({ source, title }) {
                 src={item.image}
                 alt={`Screenshot of project ${item.name}`}
               />
-              <a href={item.url} target="_blank" rel="noopener noreferrer">
-                View {title}
-              </a>
+              {title == "work" ? (
+                <Link to={item.url}> View {title} </Link>
+              ) : (
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  View {title}
+                </a>
+              )}
             </ProjectCard>
           );
         })}

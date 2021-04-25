@@ -114,9 +114,6 @@ function NavigationOptions() {
       </Trigger>
       <NavList isOpen={isOpen}>
         <li>
-          <Link to="/">Showcase</Link>
-        </li>
-        <li>
           <Link to="/resume">About Me</Link>
         </li>
       </NavList>
