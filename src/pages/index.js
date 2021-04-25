@@ -29,7 +29,7 @@ const IndexPage = () => {
       <Divider>
         <a href="#work">See work ▼ </a>
       </Divider>
-      <Section href="#work">
+      <Section id="work">
         <h3>Showcase</h3>
         <Projects source={projects} title="work" />
       </Section>
