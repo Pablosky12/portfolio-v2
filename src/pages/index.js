@@ -84,10 +84,12 @@ function Projects({ source, title }) {
   function setScrollablePages() {
     const vw = window.innerWidth;
     const { current: scrollContainer } = containerRef;
-    const oneElementWidth = scrollContainer.firstChild.offsetWidth * 0.9;
+    const oneElementWidth = scrollContainer?.firstChild.offsetWidth * 0.9;
+    if (!oneElementWidth) {
+      return;
+    }
     const totalWidth = oneElementWidth * source.length + oneElementWidth;
     const pages = Math.round(totalWidth / vw);
-    console.log(totalWidth, vw);
     setPages(pages);
   }
 
