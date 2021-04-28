@@ -5,6 +5,7 @@ export const Header = styled.h2`
   line-height: 1.3em;
   color: ${({ theme }) => theme.text};
   max-width: min(80%, 1080px);
+  visibility: hidden;
   em {
     background-color: ${({ theme }) => theme.contrast1};
     color: ${({ theme }) => theme.background};

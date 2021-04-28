@@ -7,24 +7,50 @@ import comingSoon from "../images/comingsoon.svg";
 import { Header } from "../components/Header";
 import usePosts from "../hooks/usePosts";
 import { Link } from "gatsby";
+
+import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
+import { Tween, Timeline } from "react-gsap";
+
 // markup
 const IndexPage = () => {
   const articles = usePosts();
   return (
     <Layout>
       <Main>
-        <Header>
-          I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
-          products with cool tech.
-        </Header>
-        <PresentationCard>
-          <Headshot src={headBw} alt="Pablo Marcano headshot" />
-          <div>
-            <p className="name">Pablo Marcano</p>
-            <p className="desc">Montevideo, Uruguay + Remote</p>
-            <p className="desc">Available for Contract Work</p>
-          </div>
-        </PresentationCard>
+        <Timeline>
+          <Tween
+            from={{
+              x: "-100%",
+              transformOrigin: "top left",
+              visibility: "visible",
+            }}
+            to={{ x: 0 }}
+            duration={0.7}
+          >
+            <Header>
+              I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
+              products with cool tech.
+            </Header>
+          </Tween>
+          <Tween
+            from={{
+              opacity: 0,
+              visibility: "visible",
+            }}
+            to={{ opacity: 1 }}
+            duration={0.7}
+          >
+            <PresentationCard>
+              <Headshot src={headBw} alt="Pablo Marcano headshot" />
+              <div>
+                <p className="name">Pablo Marcano</p>
+                <p className="desc">Montevideo, Uruguay + Remote</p>
+                <p className="desc">Available for Contract Work</p>
+              </div>
+            </PresentationCard>
+          </Tween>
+        </Timeline>
       </Main>
       <Divider>
         <a href="#work">See work ▼ </a>
@@ -60,63 +86,45 @@ const projects = [
 
 function Projects({ source, title }) {
   const containerRef = useRef();
-  const [position, setPosition] = useState(0);
-  const [pages, setPages] = useState(0);
-  useEffect(() => {
-    moveArticles();
-  }, [position]);
+  const scrollContainerRef = useRef();
 
   useEffect(() => {
-    setScrollablePages();
-    const onResizeFn = () => {
-      setPosition(0);
-      setScrollablePages();
-    };
-    const el = window.addEventListener("resize", onResizeFn);
-    return () => window.removeEventListener("resize", el);
+    gsap.registerPlugin(Draggable);
+    Draggable.create(containerRef.current, {
+      type: "x",
+      bounds: scrollContainerRef.current,
+      inertia: true,
+    });
+    gsap.to(`#projects-${title} .project-card, #projects-${title} .coming-soon`, {
+      scrollTrigger: {
+        trigger: `#projects-${title}`,
+        start: "bottom bottom+=100",
+      },
+      visibility: "visible",
+      y: 0,
+      opacity: 1,
+      stagger: 0.1,
+    });
   }, []);
 
-  function moveArticles() {
-    const elem = containerRef.current;
-    elem.style.transform = `translateX(${position * -100}vw)`;
-  }
-
-  function setScrollablePages() {
-    const vw = window.innerWidth;
-    const { current: scrollContainer } = containerRef;
-    const oneElementWidth = scrollContainer?.firstChild.offsetWidth * 0.9;
-    if (!oneElementWidth) {
-      return;
-    }
-    const totalWidth = oneElementWidth * source.length + oneElementWidth;
-    const pages = Math.round(totalWidth / vw);
-    setPages(pages);
-  }
-
   return (
-    <ScrollContainer>
-      {!(position === 0) && (
-        <button
-          className="left"
-          onClick={() => {
-            setPosition(position - 1);
-          }}
-        >
-          {"<"}
-        </button>
-      )}
-      <ProjectsContainer className={`projects-${title}`} ref={containerRef}>
+    <ScrollContainer ref={scrollContainerRef} className="project">
+      <ProjectsContainer
+        className={`projects-${title}`}
+        ref={containerRef}
+        id={`projects-${title}`}
+      >
         {source.map((item, i) => {
           if (item.isComingSoon) {
             return (
-              <ComingSoon i={i} img={comingSoon}>
+              <ComingSoon i={i} className="coming-soon" img={comingSoon}>
                 <img src={comingSoon} alt="Coming Soon text" />
                 Coming Soon
               </ComingSoon>
             );
           }
           return (
-            <ProjectCard i={i} key={item.id}>
+            <ProjectCard className="project-card" i={i} key={item.id}>
               <h4>{item.name}</h4>
               <img
                 src={item.image}
@@ -133,39 +141,35 @@ function Projects({ source, title }) {
           );
         })}
       </ProjectsContainer>
-      {!(position == pages - 1) && (
-        <button
-          className="right"
-          onClick={() => {
-            setPosition(position + 1);
-          }}
-        >
-          {">"}
-        </button>
-      )}
+      {<span className="drag">{">"}</span>}
     </ScrollContainer>
   );
 }
 
 const ScrollContainer = styled.div`
-  width: 100vw;
-  max-width: 95vw;
   position: relative;
-  button {
+  overflow: hidden;
+  width: 100vw;
+  .drag {
     position: absolute;
-    background-color: ${({ theme }) => theme.textContrast};
-    border: 1px solid ${({ theme }) => theme.text};
-    border-radius: 200px;
-    width: 2em;
-    height: 2em;
-    color: ${({ theme }) => theme.text};
+    // override gsap draggable z index
+    z-index: 10000;
+    right: 3em;
     top: 50%;
-    z-index: 10;
-    &.left {
-      left: 0;
-    }
-    &.right {
-      right: 0;
+    font-size: 2em;
+    color: ${({ theme }) => theme.text};
+    animation: float 3s infinite ease-in-out;
+
+    @keyframes float {
+      from {
+        top: 40%;
+      }
+      50% {
+        top: 44%;
+      }
+      to {
+        top: 40%;
+      }
     }
   }
 `;
@@ -189,12 +193,14 @@ const ComingSoon = styled.li`
 
 const ProjectsContainer = styled.ul`
   list-style: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   position: relative;
   padding-bottom: 10%;
-  transition: 0.5s ease-in-out;
   li {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20%);
     &:nth-child(even) {
       top: 6vh;
     }
@@ -211,6 +217,7 @@ const ProjectsContainer = styled.ul`
 `;
 const ProjectCard = styled.li`
   min-width: 20em;
+  max-width: 20em;
   min-height: 20em;
   padding: 1em;
   color: ${({ theme }) => theme.textContrast};
@@ -262,6 +269,7 @@ const Divider = styled.div`
 
 const Headshot = styled.img`
   width: 130px;
+  height: 130px;
   transform: translateY(0.5em);
   border-radius: 100px;
   padding: 1em;
@@ -270,6 +278,7 @@ const PresentationCard = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8em;
+  visibility: hidden;
   p {
     margin: 0;
   }
