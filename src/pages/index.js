@@ -19,20 +19,10 @@ const IndexPage = () => {
     <Layout>
       <Main>
         <Timeline>
-          <Tween
-            from={{
-              x: "-100%",
-              transformOrigin: "top left",
-              visibility: "visible",
-            }}
-            to={{ x: 0 }}
-            duration={0.7}
-          >
-            <Header>
-              I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
-              products with cool tech.
-            </Header>
-          </Tween>
+          <Header>
+            I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
+            products with cool tech.
+          </Header>
           <Tween
             from={{
               opacity: 0,
@@ -95,16 +85,19 @@ function Projects({ source, title }) {
       bounds: scrollContainerRef.current,
       inertia: true,
     });
-    gsap.to(`#projects-${title} .project-card, #projects-${title} .coming-soon`, {
-      scrollTrigger: {
-        trigger: `#projects-${title}`,
-        start: "bottom bottom+=100",
-      },
-      visibility: "visible",
-      y: 0,
-      opacity: 1,
-      stagger: 0.1,
-    });
+    gsap.to(
+      `#projects-${title} .project-card, #projects-${title} .coming-soon`,
+      {
+        scrollTrigger: {
+          trigger: `#projects-${title}`,
+          start: "bottom bottom+=100",
+        },
+        visibility: "visible",
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+      }
+    );
   }, []);
 
   return (
@@ -200,7 +193,6 @@ const ProjectsContainer = styled.ul`
   li {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(20%);
     &:nth-child(even) {
       top: 6vh;
     }
@@ -223,6 +215,12 @@ const ProjectCard = styled.li`
   color: ${({ theme }) => theme.textContrast};
   position: relative;
   left: ${({ i }) => `-${i * 60}px`};
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    z-index: 10;
+    transform: translatex(5px) !important;
+  }
   h4 {
     font-size: 1.2em;
   }
@@ -263,7 +261,9 @@ const Divider = styled.div`
   padding: 1em 0;
   a {
     color: ${({ theme }) => theme.text};
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 

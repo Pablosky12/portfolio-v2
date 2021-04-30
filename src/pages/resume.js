@@ -111,6 +111,8 @@ const ExperienceItem = styled.div`
   display: flex;
   justify-content: flex-start;
   padding-bottom: 2em;
+  color: ${({ theme }) => theme.text};
+
   p,
   h3 {
     padding-right: 1em;
@@ -131,10 +133,6 @@ const ExperienceItem = styled.div`
     p {
       color: ${({ theme }) => theme.textSecondary};
     }
-  }
-
-  .description {
-    color: ${({ theme }) => theme.textSecondary};
   }
 
   &.auxiliary {
@@ -159,7 +157,7 @@ const ResumeSection = styled.section`
   flex-direction: column;
   padding: 0 20%;
   padding-top: 3em;
-  color: ${({ theme }) => theme.textSecondary};
+  color: ${({ theme }) => theme.text};
 
   &.experience {
     padding-left: 5%;
@@ -169,7 +167,7 @@ const ResumeSection = styled.section`
     }
 
     @media (max-width: 768px) {
-      padding: 0;
+      padding: 1em 0;
     }
   }
 
@@ -183,7 +181,13 @@ const ResumeSection = styled.section`
   }
 
   @media (max-width: 768px) {
-    padding: 0;
+    padding: 1em 0;
+    ol li {
+      padding: 1em 0;
+    }
+    &.experience h2 {
+      padding-left: 0;
+    }
   }
 `;
 const HeadSection = styled.section`
@@ -211,7 +215,7 @@ const HeadSection = styled.section`
     justify-content: center;
     align-items: center;
     flex-direction: column-reverse;
-    padding: 0;
+    padding: 2em 0;
 
     .content {
       width: 100%;

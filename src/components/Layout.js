@@ -171,7 +171,7 @@ const NavList = styled.ul`
   z-index: 10;
   li {
     margin: 0;
-    padding-left: 1em;
+    padding:  0 1em;
   }
   @media (max-width: 768px) {
     display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
