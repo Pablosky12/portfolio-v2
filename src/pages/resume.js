@@ -1,4 +1,5 @@
 import React from "react";
+import { Timeline, Tween } from "react-gsap";
 import styled from "styled-components";
 import { Header } from "../components/Header";
 import Layout from "../components/Layout";
@@ -9,25 +10,37 @@ function Resume() {
     <Layout>
       <main>
         <HeadSection>
-          <div className="content">
-            <Header>
-              <p>Hi!</p>
-              <p>
-                I'm <em>Pablo Marcano</em>
-              </p>
-              <p>Nice to meet you</p>
-            </Header>
-            <SubHeader>
-              I am a web developer with 3+ years of experience bringing to
-              reality beautiful and usable interfaces while maintaining and
-              building scalable and robust APIs with teams across the globe for
-              companies in areas such as imports and customs, healthcare and
-              education.
-            </SubHeader>
-          </div>
-          <div className="photo">
-            <img src={photo} alt="Pablo Marcano Headshot" />
-          </div>
+          <Timeline>
+            <div className="content">
+              <Header>
+                <p>Hi!</p>
+                <p>
+                  I'm <em>Pablo Marcano</em>
+                </p>
+                <p>Nice to meet you</p>
+              </Header>
+
+              <SubHeader>
+                I am a web developer with 3+ years of experience bringing to
+                reality beautiful and usable interfaces while maintaining and
+                building scalable and robust APIs with teams across the globe
+                for companies in areas such as imports and customs, healthcare
+                and education.
+              </SubHeader>
+            </div>
+            <Tween
+              from={{
+                opacity: "0",
+                visibility: "visible",
+              }}
+              to={{ opacity: 1 }}
+              duration={0.7}
+            >
+              <div className="photo">
+                <img src={photo} alt="Pablo Marcano Headshot" />
+              </div>
+            </Tween>
+          </Timeline>
         </HeadSection>
         <ResumeSection className="skills">
           <h2>Skills</h2>
@@ -203,7 +216,7 @@ const HeadSection = styled.section`
   .photo {
     width: 30%;
     max-width: 300px;
-
+    visibility: hidden;
     justify-content: center;
     align-items: center;
     display: flex;
