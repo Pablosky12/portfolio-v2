@@ -89,8 +89,10 @@ function Resume() {
                     <p>{i.company}</p>
                   </div>
                   <div>
-                    {i.description.map((d) => (
-                      <p className="description">{d}</p>
+                    {i.description.map((d, i) => (
+                      <p className="description" key={i}>
+                        {d}
+                      </p>
                     ))}
                   </div>
                 </ExperienceItem>
@@ -101,15 +103,15 @@ function Resume() {
         <ResumeSection className="experience">
           <h2>Auxiliary Work</h2>
           <ol>
-            {auxiliaryWork.map((i) => (
-              <li>
+            {auxiliaryWork.map((aw, i) => (
+              <li key={i}>
                 <ExperienceItem className="auxiliary">
                   <p className="date">
-                    {i.start} <br /> - <br />
-                    {i.end ? i.end : "Present"}
+                    {aw.start} <br /> - <br />
+                    {aw.end ? aw.end : "Present"}
                   </p>
-                  <h3 className="title">{i.title}</h3>
-                  <p className="description">{i.description}</p>
+                  <h3 className="title">{aw.title}</h3>
+                  <p className="description">{aw.description}</p>
                 </ExperienceItem>
               </li>
             ))}

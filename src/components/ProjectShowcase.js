@@ -40,6 +40,10 @@ function ProjectShowcase({
               <li>{x}</li>
             ))}
           </ul>
+          <h3>Link</h3>
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            Visit {title}
+          </a>
         </section>
       </InfoContainer>
     </MainContainer>
@@ -68,6 +72,12 @@ const InfoContainer = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     flex: 1;
+    a {
+      color: ${({ theme }) => theme.contrast1};
+      &:active {
+        color: ${({ theme }) => theme.contrast1};
+      }
+    }
   }
 
   ul {
@@ -98,7 +108,8 @@ const InfoContainer = styled.div`
 
 const MainContainer = styled.main`
   color: ${({ theme }) => theme.text};
-  p,li {
+  p,
+  li {
     margin: 0;
   }
   h1,

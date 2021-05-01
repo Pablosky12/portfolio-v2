@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import headBw from "../images/me-bw.jpg";
 import personalSmall from "../images/personal-small.jpg";
+import tacoSmall from "../images/taco-small.png";
 import comingSoon from "../images/comingsoon.svg";
 import { Header } from "../components/Header";
 import usePosts from "../hooks/usePosts";
@@ -68,6 +69,11 @@ const projects = [
     url: "showcase/1",
   },
   {
+    name: "Taco Generator",
+    image: tacoSmall,
+    url: "showcase/2",
+  },
+  {
     isComingSoon: true,
   },
   {
@@ -114,14 +120,19 @@ function Projects({ source, title }) {
         {source.map((item, i) => {
           if (item.isComingSoon) {
             return (
-              <ComingSoon i={i} className="coming-soon" img={comingSoon}>
+              <ComingSoon
+                i={i}
+                key={item.id}
+                className="coming-soon"
+                img={comingSoon}
+              >
                 <img src={comingSoon} alt="Coming Soon text" />
                 Coming Soon
               </ComingSoon>
             );
           }
           return (
-            <ProjectCard className="project-card" i={i} key={item.id}>
+            <ProjectCard className="project-card" i={i} key={i}>
               <h4>{item.name}</h4>
               <img
                 src={item.image}
@@ -151,7 +162,7 @@ const AnimationContainer = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
-`
+`;
 
 const ScrollContainer = styled.div`
   position: relative;
