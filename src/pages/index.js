@@ -11,6 +11,7 @@ import { Link } from "gatsby";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { Tween, Timeline } from "react-gsap";
+import LogoAnimation from "../components/LogoAnimation";
 
 // markup
 const IndexPage = () => {
@@ -23,6 +24,9 @@ const IndexPage = () => {
             I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
             products with cool tech.
           </Header>
+          <AnimationContainer>
+            <LogoAnimation />
+          </AnimationContainer>
           <Tween
             from={{
               opacity: 0,
@@ -138,6 +142,16 @@ function Projects({ source, title }) {
     </ScrollContainer>
   );
 }
+
+const AnimationContainer = styled.div`
+  position: absolute;
+  top: 25vh;
+  right: 0;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
 
 const ScrollContainer = styled.div`
   position: relative;
