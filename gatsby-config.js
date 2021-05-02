@@ -1,8 +1,7 @@
 module.exports = {
-  pathPrefix: '/portfolio-v2',
   siteMetadata: {
     title: "portfolio",
-    siteUrl: "https://test.com"
+    siteUrl: "https://pmarcano.com"
   },
   plugins: [
     "gatsby-plugin-styled-components",

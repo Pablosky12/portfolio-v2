@@ -28,16 +28,16 @@ function ProjectShowcase({
             <p>{duration}</p>
           </div>
           <div className="description">
-            {description.map((d) => (
-              <p>{d}</p>
+            {description.map((d, i) => (
+              <p key={i}>{d}</p>
             ))}
           </div>
         </section>
         <section className="techStack">
           <h3>Tech Stack</h3>
           <ul>
-            {techStack.map((x) => (
-              <li>{x}</li>
+            {techStack.map((x, i) => (
+              <li key={i}>{x}</li>
             ))}
           </ul>
           <h3>Link</h3>
