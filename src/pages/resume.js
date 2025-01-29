@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Timeline, Tween } from "react-gsap";
 import styled from "styled-components";
 import { Header } from "../components/Header";
 import Layout from "../components/Layout";
 import photo from "../images/me-bw.jpg";
+import photoSad from "../images/me-sad.jpg";
 
 function Resume() {
+  const [isSad, setIsSad] = useState(true);
   return (
     <Layout>
       <main>
@@ -21,11 +23,9 @@ function Resume() {
               </Header>
 
               <SubHeader>
-                I am a web developer with 3+ years of experience bringing to
-                reality beautiful and usable interfaces while maintaining and
-                building scalable and robust APIs with teams across the globe
-                for companies in areas such as imports and customs, healthcare
-                and education.
+                I am a software developer with 6+ years of experience bringing to
+                reality beautiful and usable interfaces, getting products to the next level, and leading groups of developers to efficiency and quality
+                for companies in marketing, healthcare, education, and customs.
               </SubHeader>
             </div>
             <Tween
@@ -36,42 +36,36 @@ function Resume() {
               to={{ opacity: 1 }}
               duration={0.7}
             >
-              <div className="photo">
-                <img src={photo} alt="Pablo Marcano Headshot" />
+              <div
+                className="photo"
+                onMouseEnter={() => setIsSad(false)}
+                onMouseLeave={() => setIsSad(true)}
+              >
+                {isSad ? (
+                  <img src={photoSad} alt="Pablo Marcano Headshot" />
+                ) : (
+                  <img src={photo} alt="Pablo Marcano Headshot" />
+                )}
               </div>
             </Tween>
           </Timeline>
         </HeadSection>
         <ResumeSection className="skills">
           <h2>Skills</h2>
+          
           <p>
-            I have worked with JavaScript during most of my career, making it my
-            go-to language for most tasks with a solid foundation on React and
-            Angular.
+            I consider myself an all-rounder. What defines me is my passion and drive to learn whatever is needed to get the job done the right way.
+            </p>
+            <p>
+              My most proficient programming languages are JavaScript and C#. I've done my fair share of Frontend work, built mobile apps,
+              deployed APIs that get used by teams across the globe, and ran too many `DELETE` statements without a `WHERE` clause.
           </p>
-          <p>
-            I also feel comfortable using the .NET stack for any backend work,
-            with Entity Framework for managing relational databases.
-          </p>
-          <p>
-            For personal projects I tend to use non-relational databases, mainly
-            MongoDB, and I’m willing to take that experience into a production
-            environment.
-          </p>
-          <p>
-            I consider my knowledge of REST principles for API building to be
-            solid, and I have also tinkered with GraphQL APIs on personal
-            projects.
-          </p>
-          <p>
-            UI/UX and Information Architecture have always caught my mind so
-            whenever I’m not writing or reading code, this is what I’m looking
-            at.
-          </p>
+        
           <p>
             Sharing what I know is one of my favorite things, that is why I’m
             usually involved in tasks like mentoring, giving workshops and
-            driving interviews
+            driving interviews. I was part of the organizing team of the .NET meetup in Montevideo, 
+            and I'm currently organizing the Montevideo JS meetup, racking up around a dozen events yearly.
           </p>
         </ResumeSection>
         <ResumeSection className="experience">
@@ -245,10 +239,63 @@ const SubHeader = styled.p`
   max-width: 70;
 `;
 
+
+
 const experienceItems = [
   {
+    start: "2024",
+    end: "2025",
+    title: "Technical Lead",
+    company: "Constellation",
+    description: [
+      `Built a content management system supporting custom data types, enabling exports and imports of data from internal tools within the company`,
+      `Led a 5 person team of developers through the transition to a new tech stack, serving as the reference for technical decisions.`,
+    ],
+  },
+  {
+    start: "2023",
+    end: "2024",
+    title: "Sr. Software Developer",
+    company: "Constellation",
+    description: [
+      `Enhanced Facebook data import speed by 60%, signicantly optimizing platform performance and user satisfaction.`,
+      `Developed a custom ad distribution compliance tool, eliminating reliance on Excel trackers and streamlining ad
+      platform deployments.`,
+      `Engineered a comprehensive platform for the efficient distribution and publishing of healthcare brochures, simplifying access for secondary insurance clients`
+    ],
+  },
+  {
+    start: "2022",
+    end: "2023",
+    title: "Sr. Software Developer",
+    company: "Virtualmind",
+    description: [
+      `Optimized and enhanced a React-based social media management platform, signicantly improving user
+  engagement and analytical capabilities.`,
+  ` Extended platform functionality by integrating advanced graphical analytics, improving client data visualization and
+  insights.`,
+  ` Boosted platform reach and utility by incorporating comprehensive timezone support, enhancing global user
+  accessibility`,
+    ],
+  },
+  {
+    start: "2020",
+    end: "2022",
+    title: "PrincipalSoftware Developer",
+    company: "Kaizen Softworks",
+    description: [
+      `Led a five-person team in the successful migration of legacy applications to React Native, enhancing performance
+and user engagement.`,
+` Dramatically reduced application loading times and enhanced mobile user satisfaction by transitioning from outdated
+frameworks to React Native.`,
+`Secured key contracts during the 2020 health crisis by developing a React Native application, ensuring public space
+compliance and safety.`,
+    
+    ],
+  },
+  {
     start: "2018",
-    end: null,
+    end: "2020",
     title: "Software Developer",
     company: "Kaizen Softworks",
     description: [

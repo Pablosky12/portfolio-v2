@@ -40,10 +40,12 @@ function ProjectShowcase({
               <li key={i}>{x}</li>
             ))}
           </ul>
-          <h3>Link</h3>
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            Visit {title}
-          </a>
+          <h3>{link ? "Link" : "Closed Source Project"}</h3>
+          {link && (
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              Visit {title}
+            </a>
+          )}
         </section>
       </InfoContainer>
     </MainContainer>

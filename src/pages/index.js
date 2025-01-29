@@ -1,18 +1,20 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import Layout from "../components/Layout";
-import headBw from "../images/me-bw.jpg";
-import personalSmall from "../images/personal-small.jpg";
-import tacoSmall from "../images/taco-small.png";
-import comingSoon from "../images/comingsoon.svg";
-import { Header } from "../components/Header";
-import usePosts from "../hooks/usePosts";
 import { Link } from "gatsby";
-
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
-import { Tween, Timeline } from "react-gsap";
+import React, { useEffect, useRef } from "react";
+import { Timeline, Tween } from "react-gsap";
+import styled from "styled-components";
+import { Header } from "../components/Header";
+import Layout from "../components/Layout";
 import LogoAnimation from "../components/LogoAnimation";
+import usePosts from "../hooks/usePosts";
+import bariapp from "../images/bariapp.png";
+import comingSoon from "../images/comingsoon.svg";
+import fretmemo from "../images/fretmemo.png";
+import headBw from "../images/me-bw.jpg";
+import mrgen from "../images/mrgen.png";
+import n8n from "../images/n8n.png";
+import personalSmall from "../images/personal-small.jpg";
 
 // markup
 const IndexPage = () => {
@@ -22,7 +24,7 @@ const IndexPage = () => {
       <Main>
         <Timeline>
           <Header>
-            I'm a<em> Web developer </em> who loves to build <em>quality</em>{" "}
+            I'm a <em>Software Developer </em>  who loves to build <em>quality</em>{" "}
             products with cool tech.
           </Header>
           <AnimationContainer>
@@ -40,8 +42,7 @@ const IndexPage = () => {
               <Headshot src={headBw} alt="Pablo Marcano headshot" />
               <div>
                 <p className="name">Pablo Marcano</p>
-                <p className="desc">Montevideo, Uruguay + Remote</p>
-                <p className="desc">Available for Contract Work</p>
+                <p className="desc">Montevideo, Uruguay</p>
               </div>
             </PresentationCard>
           </Tween>
@@ -69,9 +70,24 @@ const projects = [
     url: "showcase/1",
   },
   {
-    name: "Taco Generator",
-    image: tacoSmall,
+    name: "Fretmemo",
+    image: fretmemo,
     url: "showcase/2",
+  },
+  {
+    name: "Bariapp",
+    image: bariapp,
+    url: "showcase/3",
+  },
+  {
+    name: "Amazon Sales API Automation",
+    image: n8n,
+    url: "showcase/4",
+  },
+  {
+    name: "Mr.Gen",
+    image: mrgen,
+    url: "showcase/5",
   },
   {
     isComingSoon: true,
@@ -298,6 +314,8 @@ const Headshot = styled.img`
   transform: translateY(0.5em);
   border-radius: 100px;
   padding: 1em;
+  object-fit: cover;
+  object-position: 0 -15px;
 `;
 const PresentationCard = styled.div`
   display: flex;
