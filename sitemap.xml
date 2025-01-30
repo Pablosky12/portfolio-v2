@@ -4,5 +4,7 @@
 <url> <loc>https://pmarcano.com/resume/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://pmarcano.com/showcase/1/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://pmarcano.com/showcase/2/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://pmarcano.com/showcase/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://pmarcano.com/showcase/3/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://pmarcano.com/showcase/4/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://pmarcano.com/showcase/5/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
