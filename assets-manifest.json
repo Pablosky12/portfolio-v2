@@ -1,0 +1,15 @@
+{
+  "main.js": "render-page.js",
+  "render-page.js.map": "render-page.js.map",
+  "static/automation.png": "static/automation-f4fa2b50cdb2a7c0c1baadda3058735f.png",
+  "static/bariapp-header.png": "static/bariapp-header-cab9a16e1268545dcefa3fe2f1033420.png",
+  "static/bariapp.png": "static/bariapp-84e590668a6a804fd735a36046aa1189.png",
+  "static/comingsoon.svg": "static/comingsoon-20a31bdd0008e17259c27012e77dbc89.svg",
+  "static/fretmemo.png": "static/fretmemo-a08fc295ff4afee313b24c9360aa2478.png",
+  "static/header.jpg": "static/header-3ff8ede7dcd2ab7c27988f8195249e08.jpg",
+  "static/me-bw.jpg": "static/me-bw-760234d901b643ac46fb1533ee3f7cec.jpg",
+  "static/me-sad.jpg": "static/me-sad-00797a6f64ffc1ec63db5eb57a75a3f0.jpg",
+  "static/mrgen-sc.png": "static/mrgen-sc-69b7fa8970426f3fde916e59d63d89f9.png",
+  "static/mrgen.png": "static/mrgen-a768e430863585d0891b90dc02851cc4.png",
+  "static/personal-small.jpg": "static/personal-small-4bc99e0e7688b730cdc4ccf0194ea439.jpg"
+}
